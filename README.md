@@ -11,5 +11,4 @@ Google Cloud Platform using Spring Cloud GCP
 
 ### Endpoints
 * `$ curl http://localhost:8080/hello/world`
-* `$ curl http://localhost:8080/hello/world`
 * `$ curl -F 'image=@Golden_Retrievers_dark_and_light.jpg' http://localhost:8080/analyse`
