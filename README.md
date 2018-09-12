@@ -5,6 +5,7 @@ Google Cloud Platform using Spring Cloud GCP
 * Set up Google Cloud Platform
 * Create a project
 * Install gcloud and login
+* Set up GOOGLE_APPLICATION_CREDENTIALS
 * To run it locally, run: `mvn clean package spring-boot:run`
 * To run it using appengine, run `mvn clean package appengine:run`
 * To deploy it to GCP, run `mvn clean package appengine:deploy`
