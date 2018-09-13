@@ -1,4 +1,4 @@
-package gcp;
+package image.analyser;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

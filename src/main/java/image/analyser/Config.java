@@ -1,4 +1,4 @@
-package gcp;
+package image.analyser;
 
 import com.google.api.gax.core.CredentialsProvider;
 import com.google.cloud.vision.v1.ImageAnnotatorClient;
