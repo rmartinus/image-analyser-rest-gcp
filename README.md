@@ -1,12 +1,12 @@
 # rest-gcp
-Google Cloud Platform using Spring Cloud GCP
+Restful service using Spring Cloud GCP and Google App Engine
 
 ### Setup
 * Set up Google Cloud Platform
 * Create a project
 * Install gcloud and login: `$ gcloud auth login`
 * Set up GOOGLE_APPLICATION_CREDENTIALS
-* To run it locally, run: `mvn clean package spring-boot:run`
+* To run it locally, run: `$ mvn clean package spring-boot:run`
 
 ### Running it in Google Cloud Platform
 * Initialise app engine: `$ gcloud app create`
