@@ -10,7 +10,7 @@ Google Cloud Platform using Spring Cloud GCP
 
 ### Running it in Google Cloud Platform
 * Initialise app engine: `$ gcloud app create`
-* Run `mvn clean package appengine:deploy`
+* Run `$ mvn clean package appengine:deploy`
 * You should be able to access it in appspot, like: `https://single-router-216019.appspot.com/hello/world`
 
 ### Endpoints
