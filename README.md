@@ -1,5 +1,5 @@
-# rest-gcp
-Restful service using Spring Cloud GCP and Google App Engine
+# image-analyser-rest-gcp
+Image analyser restful service using Spring Cloud GCP and Google App Engine
 
 ### Setup
 * Set up Google Cloud Platform
