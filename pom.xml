@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>gcp</groupId>
-    <artifactId>rest-gcp</artifactId>
+    <artifactId>image-analyser-rest-gcp</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
 
-    <name>rest-gcp</name>
+    <name>image-analyser-rest-gcp</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
