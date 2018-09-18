@@ -5,25 +5,25 @@ import com.google.cloud.storage.Acl.Role;
 import com.google.cloud.storage.Acl.User;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
-import com.google.cloud.storage.StorageOptions;
 import com.google.common.annotations.VisibleForTesting;
+import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 import static java.util.Collections.singletonList;
 
+@Service
 public class CloudStorageService {
 
-    private static Storage storage = null;
+    private Storage storage;
 
-    static {
-        storage = StorageOptions.getDefaultInstance().getService();
+    public CloudStorageService(Storage storage) {
+        this.storage = storage;
     }
 
-    public String uploadFile(String originalFileName, byte[] fileContent, String bucketName) throws IOException {
+    public String uploadFile(String originalFileName, byte[] fileContent, String bucketName) {
         String fileName = getFileNameBasedOnTime(originalFileName, LocalDateTime.now(ZoneId.of("UTC")));
 
         BlobInfo blobInfo =
