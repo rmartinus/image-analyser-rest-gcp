@@ -12,7 +12,7 @@ Image analyser restful service using Spring Cloud GCP and Google App Engine
 * Choose the right project, eg. `$ gcloud config set project my-image-analyser`
 * Initialise app engine: `$ gcloud app create`
 * Run `$ mvn clean package appengine:deploy`
-* You should be able to access it in appspot, like: `https://single-router-216019.appspot.com/actuator/health`
+* You should be able to access it in appspot, like: `https://my-image-analyser.appspot.com/actuator/health`
 
 ### Endpoints
 * `$ curl -F 'image=@Golden_Retrievers_dark_and_light.jpg' http://localhost:8080/analyse`
