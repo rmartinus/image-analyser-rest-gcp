@@ -11,6 +11,7 @@ Image analyser restful service using Spring Cloud GCP and Google App Engine
 ### Running it in Google Cloud Platform
 * Choose the right project, eg. `$ gcloud config set project my-image-analyser`
 * Initialise app engine: `$ gcloud app create`
+* Enable Cloud Vision API
 * Run `$ mvn clean package appengine:deploy`
 * You should be able to access it in appspot, like: `https://my-image-analyser.appspot.com/actuator/health`
 
