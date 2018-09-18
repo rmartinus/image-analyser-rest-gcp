@@ -26,7 +26,7 @@ public class VisionControllerTest {
         MultipartFile image = mock(MultipartFile.class);
         byte[] imageBytes = "golden retriever".getBytes();
         given(image.getBytes()).willReturn(imageBytes);
-        given(visionService.analyse(imageBytes)).willReturn("Dog, mammal, golden retriever");
+        given(visionService.analyse(image.getOriginalFilename(), imageBytes)).willReturn("Dog, mammal, golden retriever");
 
         String analysis = visionController.analyse(image);
 
