@@ -1,10 +1,10 @@
 package image.analyser;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -13,13 +13,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringRunner.class)
 public class VisionControllerTest {
-    @Mock
+    @MockBean
     private VisionService visionService;
 
-    @InjectMocks
     private VisionController visionController;
+
+    @Before
+    public void setUp() {
+        visionController = new VisionController(visionService);
+    }
 
     @Test
     public void shouldReturnAnalysisSuccessfullyWhenFileIsUploaded() throws IOException {

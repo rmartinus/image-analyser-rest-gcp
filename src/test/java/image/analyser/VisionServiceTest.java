@@ -5,8 +5,8 @@ import com.google.cloud.vision.v1.ImageAnnotatorClient;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyList;
@@ -14,12 +14,11 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
 public class VisionServiceTest {
-
-    @Mock
+    @MockBean
     private ImageAnnotatorClient imageAnnotatorClient;
-    @Mock
+    @MockBean
     private CloudStorageService cloudStorageService;
 
     private VisionService visionService;

@@ -3,11 +3,11 @@ package image.analyser;
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
 
@@ -15,12 +15,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
 public class CloudStorageServiceTest {
-    @Mock
+    @MockBean
     private Storage storage;
-    @InjectMocks
+
     private CloudStorageService cloudStorageService;
+
+    @Before
+    public void setUp() {
+        cloudStorageService = new CloudStorageService(storage);
+    }
 
     @Test
     public void shouldCreateFileNameBasedOnTime() {
