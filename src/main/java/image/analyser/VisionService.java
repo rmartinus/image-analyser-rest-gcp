@@ -16,11 +16,15 @@ public class VisionService {
     private final ImageAnnotatorClient imageAnnotatorClient;
     private final CloudStorageService cloudStorageService;
     private final String bucketName;
+    private final UploadHistoryRepository repository;
 
-    public VisionService(ImageAnnotatorClient imageAnnotatorClient, CloudStorageService cloudStorageService, @Value("${image.analyser.cloud.storage.bucket.name}") String bucketName) {
+    public VisionService(ImageAnnotatorClient imageAnnotatorClient, CloudStorageService cloudStorageService,
+                         UploadHistoryRepository uploadHistoryRepository,
+                         @Value("${image.analyser.cloud.storage.bucket.name}") String bucketName) {
         this.imageAnnotatorClient = imageAnnotatorClient;
         this.cloudStorageService = cloudStorageService;
         this.bucketName = bucketName;
+        repository = uploadHistoryRepository;
     }
 
     public String analyse(String fileName, byte[] fileContent) {
@@ -43,6 +47,10 @@ public class VisionService {
         LOGGER.debug("Uploading file {} to {} bucket....", fileName, bucketName);
         cloudStorageService.uploadFile(fileName, fileContent, bucketName);
         LOGGER.debug("Upload completed");
+
+        LOGGER.debug("Saving it to db");
+        repository.save(new UploadHistoryEntity("test", fileName, batchAnnotateImagesResponse.toString()));
+        LOGGER.debug("Save completed");
 
         return batchAnnotateImagesResponse.toString();
     }

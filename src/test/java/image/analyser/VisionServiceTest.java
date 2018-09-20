@@ -20,12 +20,14 @@ public class VisionServiceTest {
     private ImageAnnotatorClient imageAnnotatorClient;
     @MockBean
     private CloudStorageService cloudStorageService;
+    @MockBean
+    private UploadHistoryRepository uploadHistoryRepository;
 
     private VisionService visionService;
 
     @Before
     public void setUp() {
-        visionService = new VisionService(imageAnnotatorClient, cloudStorageService, "myBucket");
+        visionService = new VisionService(imageAnnotatorClient, cloudStorageService, uploadHistoryRepository, "myBucket");
     }
 
     @Test
