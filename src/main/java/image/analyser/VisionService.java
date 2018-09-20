@@ -38,9 +38,9 @@ public class VisionService {
                                 .build())
                         .build())
         );
-        LOGGER.debug("Analysis completed");
+        LOGGER.debug("Analysis completed. Result: {}", batchAnnotateImagesResponse.toString());
 
-        LOGGER.debug("Uploading file {} to {}....", fileName, bucketName);
+        LOGGER.debug("Uploading file {} to {} bucket....", fileName, bucketName);
         cloudStorageService.uploadFile(fileName, fileContent, bucketName);
         LOGGER.debug("Upload completed");
 
