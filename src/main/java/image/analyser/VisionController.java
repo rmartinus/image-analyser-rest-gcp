@@ -18,7 +18,7 @@ public class VisionController {
         this.visionService = visionService;
     }
 
-    @PostMapping("/analyse")
+    @PostMapping("/v1/analyse")
     public String analyse(@RequestParam MultipartFile image) throws IOException {
         LOGGER.info("Received uploaded file {}", image.getOriginalFilename());
         return visionService.analyse(image.getOriginalFilename(), image.getBytes());

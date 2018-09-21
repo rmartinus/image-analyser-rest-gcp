@@ -22,4 +22,4 @@ Image analyser restful service using Spring Cloud GCP and Google App Engine
 * You should be able to access it in appspot, like: `https://my-image-analyser.appspot.com/actuator/health`
 
 ### Endpoints
-* `$ curl -F 'image=@Golden_Retrievers_dark_and_light.jpg' http://localhost:8080/analyse`
+* `$ curl -F 'image=@Golden_Retrievers_dark_and_light.jpg' http://localhost:8080/v1/analyse`

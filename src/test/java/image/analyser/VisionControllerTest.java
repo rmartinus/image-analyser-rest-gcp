@@ -37,7 +37,7 @@ public class VisionControllerTest {
         MockMultipartFile file = new MockMultipartFile("image", "dog.jpg", "image/jpg", imageBytes);
         given(visionService.analyse("dog.jpg", imageBytes)).willReturn("Dog, mammal, golden retriever");
 
-        mvc.perform(MockMvcRequestBuilders.multipart("/analyse")
+        mvc.perform(MockMvcRequestBuilders.multipart("/v1//analyse")
                 .file(file))
                 .andExpect(status().is(200))
                 .andExpect(content().string("Dog, mammal, golden retriever"));

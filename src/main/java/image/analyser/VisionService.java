@@ -40,6 +40,7 @@ public class VisionService {
         LOGGER.debug("Storing file {} to {} bucket....", fileName, bucketName);
         String mediaLink = cloudStorageService.uploadFile(fileName, fileContent, bucketName);
         LOGGER.debug("Store completed");
+
         return mediaLink;
     }
 
@@ -59,6 +60,7 @@ public class VisionService {
                         .build())
         );
         LOGGER.debug("Analysis completed. Result: {}", batchAnnotateImagesResponse.toString());
+
         return batchAnnotateImagesResponse;
     }
 
