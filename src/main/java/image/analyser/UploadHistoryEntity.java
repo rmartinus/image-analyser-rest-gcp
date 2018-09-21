@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 
 @Entity
 @Data
@@ -13,5 +14,5 @@ import javax.persistence.Entity;
 public class UploadHistoryEntity extends AbstractEntity {
     private String type;
     private String fileName;
-    private String analysis;
+    @Lob private String analysis;
 }
