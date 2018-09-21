@@ -16,18 +16,34 @@ public class VisionService {
     private final ImageAnnotatorClient imageAnnotatorClient;
     private final CloudStorageService cloudStorageService;
     private final String bucketName;
-    private final UploadHistoryRepository repository;
+    private final UploadHistoryRepository uploadHistoryRepository;
 
-    public VisionService(ImageAnnotatorClient imageAnnotatorClient, CloudStorageService cloudStorageService,
+    public VisionService(CloudStorageService cloudStorageService,
+                         ImageAnnotatorClient imageAnnotatorClient,
                          UploadHistoryRepository uploadHistoryRepository,
                          @Value("${image.analyser.cloud.storage.bucket.name}") String bucketName) {
         this.imageAnnotatorClient = imageAnnotatorClient;
         this.cloudStorageService = cloudStorageService;
+        this.uploadHistoryRepository = uploadHistoryRepository;
         this.bucketName = bucketName;
-        repository = uploadHistoryRepository;
     }
 
     public String analyse(String fileName, byte[] fileContent) {
+        String mediaLink = storeFile(fileName, fileContent);
+        BatchAnnotateImagesResponse batchAnnotateImagesResponse = analyseFile(fileName, fileContent);
+        saveImageInformation(fileName, mediaLink, batchAnnotateImagesResponse);
+
+        return batchAnnotateImagesResponse.toString();
+    }
+
+    private String storeFile(String fileName, byte[] fileContent) {
+        LOGGER.debug("Storing file {} to {} bucket....", fileName, bucketName);
+        String mediaLink = cloudStorageService.uploadFile(fileName, fileContent, bucketName);
+        LOGGER.debug("Store completed");
+        return mediaLink;
+    }
+
+    private BatchAnnotateImagesResponse analyseFile(String fileName, byte[] fileContent) {
         LOGGER.debug("Analysing file {}....", fileName);
         BatchAnnotateImagesResponse batchAnnotateImagesResponse = imageAnnotatorClient.batchAnnotateImages(
                 singletonList(AnnotateImageRequest.newBuilder()
@@ -43,15 +59,12 @@ public class VisionService {
                         .build())
         );
         LOGGER.debug("Analysis completed. Result: {}", batchAnnotateImagesResponse.toString());
+        return batchAnnotateImagesResponse;
+    }
 
-        LOGGER.debug("Uploading file {} to {} bucket....", fileName, bucketName);
-        cloudStorageService.uploadFile(fileName, fileContent, bucketName);
-        LOGGER.debug("Upload completed");
-
+    private void saveImageInformation(String fileName, String mediaLink, BatchAnnotateImagesResponse batchAnnotateImagesResponse) {
         LOGGER.debug("Saving it to db");
-        repository.save(new UploadHistoryEntity("test", fileName, batchAnnotateImagesResponse.toString()));
+        uploadHistoryRepository.save(new UploadHistoryEntity("test", fileName, mediaLink, batchAnnotateImagesResponse.toString()));
         LOGGER.debug("Save completed");
-
-        return batchAnnotateImagesResponse.toString();
     }
 }

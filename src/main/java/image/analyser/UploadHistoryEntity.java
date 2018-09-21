@@ -14,5 +14,6 @@ import javax.persistence.Lob;
 public class UploadHistoryEntity extends AbstractEntity {
     private String type;
     private String fileName;
+    private String fileLocation;
     @Lob private String analysis;
 }
