@@ -37,7 +37,7 @@ public class VisionService {
     }
 
     private String storeFile(String fileName, byte[] fileContent) {
-        LOGGER.debug("Storing file {} to {} bucket....", fileName, bucketName);
+        LOGGER.debug("Storing file {} in {} bucket....", fileName, bucketName);
         String mediaLink = cloudStorageService.uploadFile(fileName, fileContent, bucketName);
         LOGGER.debug("Store completed");
 

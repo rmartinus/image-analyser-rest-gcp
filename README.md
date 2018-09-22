@@ -23,3 +23,7 @@ Image analyser restful service using Spring Cloud GCP and Google App Engine
 
 ### Endpoints
 * `$ curl -F 'image=@Golden_Retrievers_dark_and_light.jpg' http://localhost:8080/v1/analyse`
+
+### Database proxy
+* Run database proxy using cloud_sql_proxy tool provided by GCP and you an use DB tool like SequelPro to browse database to localhost:3306:
+`$ ./cloud_sql_proxy -instances=my-image-analyser:australia-southeast1:my-image-analyser-2g=tcp:3306`
