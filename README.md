@@ -11,10 +11,9 @@ Image analyser restful service using Spring Cloud GCP and Google App Engine
 ### Running it in Google Cloud Platform
 * Choose the right project, eg. `$ gcloud config set project my-image-analyser`
 * Initialise app engine: `$ gcloud app create`
-* Enable Cloud Vision API
-* Enable Cloud SQL Admin API
+* Enable Cloud Vision API `$ gcloud services enable vision.googleapis.com`
+* Enable Cloud SQL Admin API `$ gcloud services enable sqladmin.googleapis.com`
 * Enable SQL API, provision SQL instance and a new db:
-  - `$ gcloud services enable sqladmin.googleapis.com`
   - `$ gcloud sql instances create my-image-analyser --region=australia-southeast1`
   - `$ gcloud sql databases create my_image_analyser --instance my-image-analyser-2g`
 * Double check application.properties has correct settings
