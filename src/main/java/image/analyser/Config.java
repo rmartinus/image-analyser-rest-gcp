@@ -8,10 +8,14 @@ import com.google.cloud.vision.v1.ImageAnnotatorSettings;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.io.IOException;
 
 @Configuration
+@EnableTransactionManagement
+@EnableJpaRepositories
 @EnableJpaAuditing
 public class Config {
     @Bean
