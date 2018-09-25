@@ -6,7 +6,7 @@ Image analyser restful service using Spring Cloud GCP and Google App Engine
 * Create a project
 * Install gcloud and login: `$ gcloud auth login`
 * Set up GOOGLE_APPLICATION_CREDENTIALS
-* To run it locally, run: `$ mvn clean package spring-boot:run`
+* To run it locally, run: `$ ./mvnw clean package spring-boot:run`
 
 ### Running it in Google Cloud Platform
 * Choose the right project, eg. `$ gcloud config set project my-image-analyser`
@@ -17,7 +17,7 @@ Image analyser restful service using Spring Cloud GCP and Google App Engine
   - `$ gcloud sql instances create my-image-analyser --region=australia-southeast1`
   - `$ gcloud sql databases create my_image_analyser --instance my-image-analyser-2g`
 * Double check application.properties has correct settings
-* Run `$ mvn clean package appengine:deploy`
+* Run `$ ./mvnw clean package appengine:deploy`
 * You should be able to access it in appspot, like: `https://my-image-analyser.appspot.com/actuator/health`
 
 ### Endpoints
