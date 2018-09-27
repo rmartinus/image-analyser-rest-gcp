@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Map;
 
 @RestController
 public class VisionController {
@@ -18,9 +20,10 @@ public class VisionController {
         this.visionService = visionService;
     }
 
-    @PostMapping("/v1/analyse")
-    public String analyse(@RequestParam MultipartFile image) throws IOException {
+    @PostMapping(value = "/v1/analyse", produces = "application/json")
+    public Map<String, String> analyse(@RequestParam MultipartFile image) throws IOException {
         LOGGER.info("Received uploaded file {}", image.getOriginalFilename());
-        return visionService.analyse(image.getOriginalFilename(), image.getBytes());
+        String analysis = visionService.analyse(image.getOriginalFilename(), image.getBytes());
+        return Collections.singletonMap("response", analysis);
     }
 }

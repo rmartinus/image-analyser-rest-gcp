@@ -40,6 +40,6 @@ public class VisionControllerTest {
         mvc.perform(MockMvcRequestBuilders.multipart("/v1//analyse")
                 .file(file))
                 .andExpect(status().is(200))
-                .andExpect(content().string("Dog, mammal, golden retriever"));
+                .andExpect(content().json("{\"response\":\"Dog, mammal, golden retriever\"}"));
     }
 }
