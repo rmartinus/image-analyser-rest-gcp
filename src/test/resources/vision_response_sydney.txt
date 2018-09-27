@@ -1,0 +1,556 @@
+responses {
+  label_annotations {
+    mid: "/m/05_5t0l"
+    description: "landmark"
+    score: 0.967674
+    topicality: 0.967674
+  }
+  label_annotations {
+    mid: "/m/0204fg"
+    description: "skyline"
+    score: 0.9292443
+    topicality: 0.9292443
+  }
+  label_annotations {
+    mid: "/m/034z7h"
+    description: "cityscape"
+    score: 0.92120796
+    topicality: 0.92120796
+  }
+  label_annotations {
+    mid: "/m/0pgl9"
+    description: "tourist attraction"
+    score: 0.91779816
+    topicality: 0.91779816
+  }
+  label_annotations {
+    mid: "/m/015kr"
+    description: "bridge"
+    score: 0.9071824
+    topicality: 0.9071824
+  }
+  label_annotations {
+    mid: "/m/056mk"
+    description: "metropolis"
+    score: 0.8947533
+    topicality: 0.8947533
+  }
+  label_annotations {
+    mid: "/m/01n32"
+    description: "city"
+    score: 0.8878418
+    topicality: 0.8878418
+  }
+  label_annotations {
+    mid: "/m/079bkr"
+    description: "mode of transport"
+    score: 0.8752474
+    topicality: 0.8752474
+  }
+  label_annotations {
+    mid: "/m/01bqvp"
+    description: "sky"
+    score: 0.83777213
+    topicality: 0.83777213
+  }
+  label_annotations {
+    mid: "/m/0j_s4"
+    description: "metropolitan area"
+    score: 0.8217848
+    topicality: 0.8217848
+  }
+  text_annotations {
+    locale: "und"
+    description: "4\n\334\235\334\220 \334\23215\334\254\n"
+    bounding_poly {
+      vertices {
+        x: 14
+        y: 18
+      }
+      vertices {
+        x: 193
+        y: 18
+      }
+      vertices {
+        x: 193
+        y: 53
+      }
+      vertices {
+        x: 14
+        y: 53
+      }
+    }
+  }
+  text_annotations {
+    description: "4"
+    bounding_poly {
+      vertices {
+        x: 183
+        y: 18
+      }
+      vertices {
+        x: 193
+        y: 18
+      }
+      vertices {
+        x: 193
+        y: 53
+      }
+      vertices {
+        x: 183
+        y: 53
+      }
+    }
+  }
+  text_annotations {
+    description: "\334\235\334\220"
+    bounding_poly {
+      vertices {
+        x: 102
+        y: 18
+      }
+      vertices {
+        x: 134
+        y: 18
+      }
+      vertices {
+        x: 134
+        y: 53
+      }
+      vertices {
+        x: 102
+        y: 53
+      }
+    }
+  }
+  text_annotations {
+    description: "\334\232"
+    bounding_poly {
+      vertices {
+        x: 93
+        y: 18
+      }
+      vertices {
+        x: 102
+        y: 18
+      }
+      vertices {
+        x: 102
+        y: 53
+      }
+      vertices {
+        x: 93
+        y: 53
+      }
+    }
+  }
+  text_annotations {
+    description: "15"
+    bounding_poly {
+      vertices {
+        x: 45
+        y: 18
+      }
+      vertices {
+        x: 68
+        y: 18
+      }
+      vertices {
+        x: 68
+        y: 53
+      }
+      vertices {
+        x: 45
+        y: 53
+      }
+    }
+  }
+  text_annotations {
+    description: "\334\254"
+    bounding_poly {
+      vertices {
+        x: 14
+        y: 18
+      }
+      vertices {
+        x: 23
+        y: 18
+      }
+      vertices {
+        x: 23
+        y: 53
+      }
+      vertices {
+        x: 14
+        y: 53
+      }
+    }
+  }
+  full_text_annotation {
+    pages {
+      width: 220
+      height: 69
+      blocks {
+        bounding_box {
+          vertices {
+            x: 183
+            y: 18
+          }
+          vertices {
+            x: 193
+            y: 18
+          }
+          vertices {
+            x: 193
+            y: 53
+          }
+          vertices {
+            x: 183
+            y: 53
+          }
+        }
+        paragraphs {
+          bounding_box {
+            vertices {
+              x: 183
+              y: 18
+            }
+            vertices {
+              x: 193
+              y: 18
+            }
+            vertices {
+              x: 193
+              y: 53
+            }
+            vertices {
+              x: 183
+              y: 53
+            }
+          }
+          words {
+            bounding_box {
+              vertices {
+                x: 183
+                y: 18
+              }
+              vertices {
+                x: 193
+                y: 18
+              }
+              vertices {
+                x: 193
+                y: 53
+              }
+              vertices {
+                x: 183
+                y: 53
+              }
+            }
+            symbols {
+              property {
+                detected_break {
+                  type: LINE_BREAK
+                }
+              }
+              bounding_box {
+                vertices {
+                  x: 183
+                  y: 18
+                }
+                vertices {
+                  x: 193
+                  y: 18
+                }
+                vertices {
+                  x: 193
+                  y: 53
+                }
+                vertices {
+                  x: 183
+                  y: 53
+                }
+              }
+              text: "4"
+              confidence: 0.3
+            }
+            confidence: 0.3
+          }
+          confidence: 0.3
+        }
+        block_type: TEXT
+        confidence: 0.3
+      }
+      blocks {
+        bounding_box {
+          vertices {
+            x: 14
+            y: 18
+          }
+          vertices {
+            x: 134
+            y: 18
+          }
+          vertices {
+            x: 134
+            y: 53
+          }
+          vertices {
+            x: 14
+            y: 53
+          }
+        }
+        paragraphs {
+          bounding_box {
+            vertices {
+              x: 14
+              y: 18
+            }
+            vertices {
+              x: 134
+              y: 18
+            }
+            vertices {
+              x: 134
+              y: 53
+            }
+            vertices {
+              x: 14
+              y: 53
+            }
+          }
+          words {
+            bounding_box {
+              vertices {
+                x: 102
+                y: 18
+              }
+              vertices {
+                x: 134
+                y: 18
+              }
+              vertices {
+                x: 134
+                y: 53
+              }
+              vertices {
+                x: 102
+                y: 53
+              }
+            }
+            symbols {
+              bounding_box {
+                vertices {
+                  x: 120
+                  y: 18
+                }
+                vertices {
+                  x: 134
+                  y: 18
+                }
+                vertices {
+                  x: 134
+                  y: 53
+                }
+                vertices {
+                  x: 120
+                  y: 53
+                }
+              }
+              text: "\334\235"
+              confidence: 0.51
+            }
+            symbols {
+              property {
+                detected_break {
+                  type: SPACE
+                }
+              }
+              bounding_box {
+                vertices {
+                  x: 102
+                  y: 18
+                }
+                vertices {
+                  x: 116
+                  y: 18
+                }
+                vertices {
+                  x: 116
+                  y: 53
+                }
+                vertices {
+                  x: 102
+                  y: 53
+                }
+              }
+              text: "\334\220"
+              confidence: 0.44
+            }
+            confidence: 0.47
+          }
+          words {
+            bounding_box {
+              vertices {
+                x: 93
+                y: 18
+              }
+              vertices {
+                x: 102
+                y: 18
+              }
+              vertices {
+                x: 102
+                y: 53
+              }
+              vertices {
+                x: 93
+                y: 53
+              }
+            }
+            symbols {
+              bounding_box {
+                vertices {
+                  x: 93
+                  y: 18
+                }
+                vertices {
+                  x: 102
+                  y: 18
+                }
+                vertices {
+                  x: 102
+                  y: 53
+                }
+                vertices {
+                  x: 93
+                  y: 53
+                }
+              }
+              text: "\334\232"
+              confidence: 0.57
+            }
+            confidence: 0.57
+          }
+          words {
+            bounding_box {
+              vertices {
+                x: 45
+                y: 18
+              }
+              vertices {
+                x: 68
+                y: 18
+              }
+              vertices {
+                x: 68
+                y: 53
+              }
+              vertices {
+                x: 45
+                y: 53
+              }
+            }
+            symbols {
+              bounding_box {
+                vertices {
+                  x: 45
+                  y: 18
+                }
+                vertices {
+                  x: 54
+                  y: 18
+                }
+                vertices {
+                  x: 54
+                  y: 53
+                }
+                vertices {
+                  x: 45
+                  y: 53
+                }
+              }
+              text: "1"
+              confidence: 0.34
+            }
+            symbols {
+              bounding_box {
+                vertices {
+                  x: 56
+                  y: 18
+                }
+                vertices {
+                  x: 68
+                  y: 18
+                }
+                vertices {
+                  x: 68
+                  y: 53
+                }
+                vertices {
+                  x: 56
+                  y: 53
+                }
+              }
+              text: "5"
+              confidence: 0.7
+            }
+            confidence: 0.52
+          }
+          words {
+            bounding_box {
+              vertices {
+                x: 14
+                y: 18
+              }
+              vertices {
+                x: 23
+                y: 18
+              }
+              vertices {
+                x: 23
+                y: 53
+              }
+              vertices {
+                x: 14
+                y: 53
+              }
+            }
+            symbols {
+              property {
+                detected_break {
+                  type: LINE_BREAK
+                }
+              }
+              bounding_box {
+                vertices {
+                  x: 14
+                  y: 18
+                }
+                vertices {
+                  x: 23
+                  y: 18
+                }
+                vertices {
+                  x: 23
+                  y: 53
+                }
+                vertices {
+                  x: 14
+                  y: 53
+                }
+              }
+              text: "\334\254"
+              confidence: 0.31
+            }
+            confidence: 0.31
+          }
+          confidence: 0.47
+        }
+        block_type: TEXT
+        confidence: 0.47
+      }
+    }
+    text: "4\n\334\235\334\220 \334\23215\334\254\n"
+  }
+}

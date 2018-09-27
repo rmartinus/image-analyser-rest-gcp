@@ -1,0 +1,62 @@
+responses {
+  label_annotations {
+    mid: "/m/02xwb"
+    description: "fruit"
+    score: 0.96256053
+    topicality: 0.96256053
+  }
+  label_annotations {
+    mid: "/m/08tlbj"
+    description: "natural foods"
+    score: 0.93661046
+    topicality: 0.93661046
+  }
+  label_annotations {
+    mid: "/m/01hxyd"
+    description: "local food"
+    score: 0.9006023
+    topicality: 0.9006023
+  }
+  label_annotations {
+    mid: "/m/036qh8"
+    description: "produce"
+    score: 0.88170123
+    topicality: 0.88170123
+  }
+  label_annotations {
+    mid: "/m/07fbm7"
+    description: "strawberry"
+    score: 0.8716041
+    topicality: 0.8716041
+  }
+  label_annotations {
+    mid: "/m/0fbdb"
+    description: "strawberries"
+    score: 0.856427
+    topicality: 0.856427
+  }
+  label_annotations {
+    mid: "/m/01z562"
+    description: "basket"
+    score: 0.7374296
+    topicality: 0.7374296
+  }
+  label_annotations {
+    mid: "/m/02r4717"
+    description: "gift basket"
+    score: 0.645678
+    topicality: 0.645678
+  }
+  label_annotations {
+    mid: "/m/014j1m"
+    description: "apple"
+    score: 0.6154081
+    topicality: 0.6154081
+  }
+  label_annotations {
+    mid: "/m/0dxb5"
+    description: "berry"
+    score: 0.58403057
+    topicality: 0.58403057
+  }
+}
