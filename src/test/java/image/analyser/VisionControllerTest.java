@@ -11,6 +11,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -34,12 +37,16 @@ public class VisionControllerTest {
     @Test
     public void shouldReturnAnalysisSuccessfullyWhenFileIsUploaded() throws Exception {
         byte[] imageBytes = "golden retriever".getBytes();
-        MockMultipartFile file = new MockMultipartFile("image", "dog.jpg", "image/jpg", imageBytes);
-        given(visionService.analyse("dog.jpg", imageBytes)).willReturn("Dog, mammal, golden retriever");
+        MockMultipartFile file = new MockMultipartFile("image", "mango.jpg", "image/jpg", imageBytes);
+        Map<String, Float> analysisMap = new HashMap<>();
+        analysisMap.put("produce", 0.9113305F);
+        analysisMap.put("mango", 0.89417756F);
+
+        given(visionService.analyse("mango.jpg", imageBytes)).willReturn(analysisMap);
 
         mvc.perform(MockMvcRequestBuilders.multipart("/v1//analyse")
                 .file(file))
                 .andExpect(status().is(200))
-                .andExpect(content().string("Dog, mammal, golden retriever"));
+                .andExpect(content().json("{\"produce\": 0.9113305, \"mango\": 0.89417756}"));
     }
 }

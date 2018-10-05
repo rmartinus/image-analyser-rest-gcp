@@ -7,6 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import static com.google.cloud.vision.v1.Feature.Type.*;
 import static java.util.Collections.singletonList;
 
@@ -28,12 +31,19 @@ public class VisionService {
         this.bucketName = bucketName;
     }
 
-    public String analyse(String fileName, byte[] fileContent) {
+    public Map<String, Float> analyse(String fileName, byte[] fileContent) {
         String mediaLink = storeFile(fileName, fileContent);
         BatchAnnotateImagesResponse batchAnnotateImagesResponse = analyseFile(fileName, fileContent);
-        saveImageInformation(fileName, mediaLink, batchAnnotateImagesResponse);
+        Map<String, Float> response = new LinkedHashMap<>();
+        batchAnnotateImagesResponse.getResponsesList().forEach(imageResponse -> {
+            imageResponse.getLandmarkAnnotationsList().forEach(landmarkAnnotation -> response.put(landmarkAnnotation.getDescription(), landmarkAnnotation.getScore()));
+            imageResponse.getLogoAnnotationsList().forEach(logoAnnotation -> response.put(logoAnnotation.getDescription(), logoAnnotation.getScore()));
+            imageResponse.getLabelAnnotationsList().forEach(labelAnnotation -> response.put(labelAnnotation.getDescription(), labelAnnotation.getScore()));
+            imageResponse.getTextAnnotationsList().forEach(textAnnotation -> response.put(textAnnotation.getDescription(), textAnnotation.getScore()));
+        });
 
-        return batchAnnotateImagesResponse.toString();
+        saveImageInformation(fileName, mediaLink, response);
+        return response;
     }
 
     private String storeFile(String fileName, byte[] fileContent) {
@@ -48,7 +58,6 @@ public class VisionService {
         LOGGER.debug("Analysing file {}....", fileName);
         BatchAnnotateImagesResponse batchAnnotateImagesResponse = imageAnnotatorClient.batchAnnotateImages(
                 singletonList(AnnotateImageRequest.newBuilder()
-                        .addFeatures(Feature.newBuilder().setType(FACE_DETECTION).build())
                         .addFeatures(Feature.newBuilder().setType(LANDMARK_DETECTION).build())
                         .addFeatures(Feature.newBuilder().setType(LOGO_DETECTION).build())
                         .addFeatures(Feature.newBuilder().setType(LABEL_DETECTION).build())
@@ -64,9 +73,9 @@ public class VisionService {
         return batchAnnotateImagesResponse;
     }
 
-    private void saveImageInformation(String fileName, String mediaLink, BatchAnnotateImagesResponse batchAnnotateImagesResponse) {
+    private void saveImageInformation(String fileName, String mediaLink, Map<String, Float> response) {
         LOGGER.debug("Saving it to db");
-        uploadHistoryRepository.save(new UploadHistoryEntity("test", fileName, mediaLink, batchAnnotateImagesResponse.toString()));
+        uploadHistoryRepository.save(new UploadHistoryEntity("test", fileName, mediaLink, response.toString()));
         LOGGER.debug("Save completed");
     }
 }

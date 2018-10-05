@@ -1,6 +1,8 @@
 package image.analyser;
 
+import com.google.cloud.vision.v1.AnnotateImageResponse;
 import com.google.cloud.vision.v1.BatchAnnotateImagesResponse;
+import com.google.cloud.vision.v1.EntityAnnotation;
 import com.google.cloud.vision.v1.ImageAnnotatorClient;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +13,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyList;
@@ -37,23 +41,43 @@ public class VisionServiceTest {
 
     @Test
     public void shouldUploadImageToStorageBucketThenAnalyseFileThenStoreInDB() {
-        BatchAnnotateImagesResponse batchAnnotateImagesResponse = mock(BatchAnnotateImagesResponse.class);
-        given(batchAnnotateImagesResponse.toString()).willReturn("It is indeed an image of a dog");
+        BatchAnnotateImagesResponse batchAnnotateImagesResponse = BatchAnnotateImagesResponse.newBuilder()
+                .addResponses((AnnotateImageResponse.newBuilder()
+                        .addLabelAnnotations(
+                                EntityAnnotation.newBuilder()
+                                        .setMid("/m/036qh8")
+                                        .setDescription("produce")
+                                        .setScore(0.9113305F)
+                                        .setTopicality(0.9113305F)
+                                        .build())
+                        .addLabelAnnotations(
+                                EntityAnnotation.newBuilder()
+                                        .setMid("/m/0fldg")
+                                        .setDescription("mango")
+                                        .setScore(0.89417756F)
+                                        .setTopicality(0.89417756F)
+                                        .build())
+                        .build()))
+                .build();
         given(cloudStorageService.uploadFile(anyString(), any(), anyString())).willReturn("mediaLink");
         given(imageAnnotatorClient.batchAnnotateImages(anyList())).willReturn(batchAnnotateImagesResponse);
         byte[] fileContent = new byte[]{};
 
-        String analyse = visionService.analyse("dog.png", fileContent);
+        Map<String, Float> analyse = visionService.analyse("mango.png", fileContent);
 
         InOrder inOrder = inOrder(cloudStorageService, imageAnnotatorClient);
-        inOrder.verify(cloudStorageService).uploadFile("dog.png", fileContent, "myBucket");
+        inOrder.verify(cloudStorageService).uploadFile("mango.png", fileContent, "myBucket");
         inOrder.verify(imageAnnotatorClient).batchAnnotateImages(anyList());
 
-        assertThat(analyse).isEqualTo("It is indeed an image of a dog");
+        Map<String, Float> expectedOutput = new HashMap<>();
+        expectedOutput.put("produce", 0.9113305F);
+        expectedOutput.put("mango", 0.89417756F);
+
+        assertThat(analyse).isEqualTo(expectedOutput);
         List<UploadHistoryEntity> data = uploadHistoryRepository.findByType("test");
         assertThat(data.size()).isEqualTo(1);
-        assertThat(data.get(0).getFileName()).isEqualTo("dog.png");
+        assertThat(data.get(0).getFileName()).isEqualTo("mango.png");
         assertThat(data.get(0).getFileLocation()).isEqualTo("mediaLink");
-        assertThat(data.get(0).getAnalysis()).isEqualTo("It is indeed an image of a dog");
+        assertThat(data.get(0).getAnalysis()).isEqualTo(expectedOutput.toString());
     }
 }

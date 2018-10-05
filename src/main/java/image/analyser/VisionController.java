@@ -4,10 +4,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Map;
 
 @RestController
 public class VisionController {
@@ -19,9 +21,10 @@ public class VisionController {
     }
 
     @PostMapping(value = "/v1/analyse")
-    public String analyse(@RequestParam MultipartFile image) throws IOException {
+    @ResponseBody
+    public Map<String, Float> analyse(@RequestParam MultipartFile image) throws IOException {
         LOGGER.info("Received uploaded file {}", image.getOriginalFilename());
-        String analysis = visionService.analyse(image.getOriginalFilename(), image.getBytes());
+        Map<String, Float> analysis = visionService.analyse(image.getOriginalFilename(), image.getBytes());
         return analysis;
     }
 }
