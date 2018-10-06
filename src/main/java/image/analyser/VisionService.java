@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.google.cloud.vision.v1.Feature.Type.*;
 import static java.util.Collections.singletonList;
@@ -75,7 +77,11 @@ public class VisionService {
 
     private void saveImageInformation(String fileName, String mediaLink, Map<String, Float> response) {
         LOGGER.debug("Saving it to db");
-        uploadHistoryRepository.save(new UploadHistoryEntity("test", fileName, mediaLink, response.toString()));
+        Set<String> typeSet = response.keySet().stream()
+                .filter(key -> key.equalsIgnoreCase(ImageType.DOG.name()) || key.equalsIgnoreCase(ImageType.CAT.name()))
+                .collect(Collectors.toSet());
+        String type = typeSet.size() > 0 ? typeSet.iterator().next().toUpperCase() : ImageType.GENERAL.name();
+        uploadHistoryRepository.save(new UploadHistoryEntity(type, fileName, mediaLink, response.toString()));
         LOGGER.debug("Save completed");
     }
 }

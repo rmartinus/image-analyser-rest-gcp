@@ -45,17 +45,13 @@ public class VisionServiceTest {
                 .addResponses((AnnotateImageResponse.newBuilder()
                         .addLabelAnnotations(
                                 EntityAnnotation.newBuilder()
-                                        .setMid("/m/036qh8")
                                         .setDescription("produce")
                                         .setScore(0.9113305F)
-                                        .setTopicality(0.9113305F)
                                         .build())
                         .addLabelAnnotations(
                                 EntityAnnotation.newBuilder()
-                                        .setMid("/m/0fldg")
                                         .setDescription("mango")
                                         .setScore(0.89417756F)
-                                        .setTopicality(0.89417756F)
                                         .build())
                         .build()))
                 .build();
@@ -74,9 +70,65 @@ public class VisionServiceTest {
         expectedOutput.put("mango", 0.89417756F);
 
         assertThat(analyse).isEqualTo(expectedOutput);
-        List<UploadHistoryEntity> data = uploadHistoryRepository.findByType("test");
+        List<UploadHistoryEntity> data = uploadHistoryRepository.findByTypeIgnoreCase("gEneraL");
         assertThat(data.size()).isEqualTo(1);
         assertThat(data.get(0).getFileName()).isEqualTo("mango.png");
+        assertThat(data.get(0).getFileLocation()).isEqualTo("mediaLink");
+        assertThat(data.get(0).getAnalysis()).isEqualTo(expectedOutput.toString());
+    }
+
+    @Test
+    public void shouldUploadFileWithDogType() {
+        BatchAnnotateImagesResponse batchAnnotateImagesResponse = BatchAnnotateImagesResponse.newBuilder()
+                .addResponses((AnnotateImageResponse.newBuilder()
+                        .addLabelAnnotations(
+                                EntityAnnotation.newBuilder()
+                                        .setDescription("dog")
+                                        .setScore(0.9113305F)
+                                        .build())
+                        .build()))
+                .build();
+        given(cloudStorageService.uploadFile(anyString(), any(), anyString())).willReturn("mediaLink");
+        given(imageAnnotatorClient.batchAnnotateImages(anyList())).willReturn(batchAnnotateImagesResponse);
+        byte[] fileContent = new byte[]{};
+
+        Map<String, Float> analyse = visionService.analyse("dog.png", fileContent);
+
+        Map<String, Float> expectedOutput = new HashMap<>();
+        expectedOutput.put("dog", 0.9113305F);
+
+        assertThat(analyse).isEqualTo(expectedOutput);
+        List<UploadHistoryEntity> data = uploadHistoryRepository.findByTypeIgnoreCase("DoG");
+        assertThat(data.size()).isEqualTo(1);
+        assertThat(data.get(0).getFileName()).isEqualTo("dog.png");
+        assertThat(data.get(0).getFileLocation()).isEqualTo("mediaLink");
+        assertThat(data.get(0).getAnalysis()).isEqualTo(expectedOutput.toString());
+    }
+
+    @Test
+    public void shouldUploadFileWithCatType() {
+        BatchAnnotateImagesResponse batchAnnotateImagesResponse = BatchAnnotateImagesResponse.newBuilder()
+                .addResponses((AnnotateImageResponse.newBuilder()
+                        .addLabelAnnotations(
+                                EntityAnnotation.newBuilder()
+                                        .setDescription("cat")
+                                        .setScore(0.9113305F)
+                                        .build())
+                        .build()))
+                .build();
+        given(cloudStorageService.uploadFile(anyString(), any(), anyString())).willReturn("mediaLink");
+        given(imageAnnotatorClient.batchAnnotateImages(anyList())).willReturn(batchAnnotateImagesResponse);
+        byte[] fileContent = new byte[]{};
+
+        Map<String, Float> analyse = visionService.analyse("cat.png", fileContent);
+
+        Map<String, Float> expectedOutput = new HashMap<>();
+        expectedOutput.put("cat", 0.9113305F);
+
+        assertThat(analyse).isEqualTo(expectedOutput);
+        List<UploadHistoryEntity> data = uploadHistoryRepository.findByTypeIgnoreCase("cAT");
+        assertThat(data.size()).isEqualTo(1);
+        assertThat(data.get(0).getFileName()).isEqualTo("cat.png");
         assertThat(data.get(0).getFileLocation()).isEqualTo("mediaLink");
         assertThat(data.get(0).getAnalysis()).isEqualTo(expectedOutput.toString());
     }
